@@ -7,6 +7,23 @@ Rails.application.configure do
     :secret_access_key => ENV['SECRET_ACCESS_KEY']
   }
 
+   config.action_mailer.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.delivery_method ||= :smtp
+
+  # Rails also needs to know where your app is
+  #   located to properly configure sending of emails
+  config.action_mailer.default_url_options = {
+    :host => 'protected-everglades-1609.herokuapp.com',
+  }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
