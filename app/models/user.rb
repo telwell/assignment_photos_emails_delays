@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 	validates_with AttachmentSizeValidator, :attributes => :avatar, :less_than => 1.megabytes
 
+	after_create :send_welcome_email
+
 private
 
 	def self.send_welcome_email(id)
