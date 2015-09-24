@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
 private
 
-	def send_welcome_email(id)
+	def self.send_welcome_email(id)
 		user = User.find(id)
     UserMailer.welcome(user).deliver!
 	end	
